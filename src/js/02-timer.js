@@ -58,7 +58,6 @@ function startTimer() {
 
     if (restTime <= 0) {
       clearInterval(idTimer);
-      activateButton(ref.btnStart);
       activateInput(ref.inputCalendar);
     }
   }, timeStep);
