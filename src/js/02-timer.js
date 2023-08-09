@@ -13,7 +13,7 @@ const ref = {
 };
 
 ref.btnStart.addEventListener('click', startTimer);
-disableButton(ref.btnStart);
+disableElement(ref.btnStart);
 
 const calendar = flatpickr('#datetime-picker', {
   enableTime: true,
@@ -29,12 +29,12 @@ const calendar = flatpickr('#datetime-picker', {
 //check user choise
 function checkUserChoice(selectedDate) {
   if (new Date().getTime() > selectedDate.getTime()) {
-    disableButton(ref.btnStart);
+    disableElement(ref.btnStart);
     showMessage('Please choose a date in the future');
     return;
   }
 
-  activateButton(ref.btnStart);
+  activateElement(ref.btnStart);
 }
 
 function startTimer() {
@@ -49,8 +49,8 @@ function startTimer() {
     return;
   }
 
-  disableButton(ref.btnStart);
-  disableInput(ref.inputCalendar);
+  disableElement(ref.btnStart);
+  disableElement(ref.inputCalendar);
 
   const idTimer = setInterval(() => {
     showTimer(restTime);
@@ -58,7 +58,7 @@ function startTimer() {
 
     if (restTime <= 0) {
       clearInterval(idTimer);
-      activateInput(ref.inputCalendar);
+      activateElement(ref.inputCalendar);
     }
   }, timeStep);
 }
@@ -76,20 +76,12 @@ function showMessage(str) {
   Notiflix.Notify.failure(str, optionsNotify);
 }
 
-function disableButton(btn) {
-  btn.disabled = true;
+function disableElement(element) {
+  element.disabled = true;
 }
 
-function activateButton(btn) {
-  btn.disabled = false;
-}
-
-function disableInput(input) {
-  input.disabled = true;
-}
-
-function activateInput(input) {
-  input.disabled = false;
+function activateElement(element) {
+  element.disabled = false;
 }
 
 function addLeadingZero(str) {
